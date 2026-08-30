@@ -1,0 +1,72 @@
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  background-color: #D2361C;
+  color: #F5F4EF;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Checkbox drawn as a Swiss proof-mark square rather than a native
+   browser checkbox with an accent-color fill. */
+input[type='checkbox'].mark {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid #111110;
+  border-radius: 0;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+input[type='checkbox'].mark:checked {
+  background-color: #111110;
+}
+
+input[type='checkbox'].mark:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: -1px;
+  width: 4px;
+  height: 8px;
+  border: solid #F5F4EF;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+
+input[type='checkbox'].mark:indeterminate {
+  background-color: transparent;
+  border-color: #D2361C;
+}
+
+input[type='checkbox'].mark:indeterminate::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  width: 7px;
+  height: 1.5px;
+  background: #D2361C;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(17, 17, 16, 0.25);
+  border-radius: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
