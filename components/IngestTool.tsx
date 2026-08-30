@@ -21,6 +21,7 @@ export default function IngestTool() {
   const [digest, setDigest] = useState<DigestResult | null>(null);
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showIgnored, setShowIgnored] = useState(false);
 
   const [tokenCounts, setTokenCounts] = useState<Map<string, number>>(new Map());
   const [isEstimating, setIsEstimating] = useState(false);
@@ -183,7 +184,7 @@ export default function IngestTool() {
           </button>
         </div>
         <div className="flex-1 overflow-auto">
-          <FileTree node={tree} excluded={excluded} onToggle={toggleNode} search={search} tokenCounts={tokenCounts} />
+          <FileTree node={tree} excluded={excluded} onToggle={toggleNode} search={search} tokenCounts={tokenCounts} showIgnored={showIgnored} />
         </div>
       </div>
 
@@ -213,6 +214,15 @@ export default function IngestTool() {
 
         <div className="flex items-center justify-between border-t border-ink/10 py-2 font-mono text-[12px]">
           <span>Respect .gitignore</span>
+          <div className="flex items-center justify-between border-t border-ink/10 py-2 font-mono text-[12px]">
+            <span>Show ignored files</span>
+            <input
+              type="checkbox"
+              className="mark"
+              checked={showIgnored}
+              onChange={(e) => setShowIgnored(e.target.checked)}
+            />
+          </div>
           <input
             type="checkbox"
             className="mark"

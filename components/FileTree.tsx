@@ -20,7 +20,7 @@ function tokensFor(node: TreeNode, counts?: Map<string, number>): number | null 
 }
 
 export default function FileTree({
-  node, excluded, onToggle, depth = 0, search, tokenCounts,
+  node, excluded, onToggle, depth = 0, search, tokenCounts, showIgnored,
 }: {
   node: TreeNode;
   excluded: Set<string>;
@@ -28,13 +28,31 @@ export default function FileTree({
   depth?: number;
   search: string;
   tokenCounts?: Map<string, number>;
+  showIgnored: boolean;
 }) {
   const query = search.trim().toLowerCase();
 
+  const visibleChildren = node.children.filter((child) => {
+    if (query && !matchesSearch(child, query)) return false;
+    if (!showIgnored) {
+      const excludedCount = child.leafPaths.filter((p) => excluded.has(p)).length;
+      if (excludedCount === child.leafPaths.length) return false; // fully ignored — hide it, gitingest-style
+    }
+    return true;
+  });
+
+  if (depth === 0 && visibleChildren.length === 0) {
+    return (
+      <p className="font-mono text-[11px] text-dim">
+        Nothing to show — everything here is ignored by default.{' '}
+        <span className="text-dim/70">Turn on &ldquo;show ignored files&rdquo; to see it.</span>
+      </p>
+    );
+  }
+
   return (
     <ul className={depth === 0 ? 'space-y-0.5' : 'ml-3.5 space-y-0.5 border-l border-ink/10 pl-3'}>
-      {node.children.map((child) => {
-        if (query && !matchesSearch(child, query)) return null;
+      {visibleChildren.map((child) => {
         const excludedCount = child.leafPaths.filter((p) => excluded.has(p)).length;
         const state = excludedCount === 0 ? 'checked' : excludedCount === child.leafPaths.length ? 'unchecked' : 'partial';
         const tokens = tokensFor(child, tokenCounts);
@@ -58,7 +76,7 @@ export default function FileTree({
                 )}
               </label>
               {child.children.length > 0 && (
-                <FileTree node={child} excluded={excluded} onToggle={onToggle} depth={depth + 1} search={search} tokenCounts={tokenCounts} />
+                <FileTree node={child} excluded={excluded} onToggle={onToggle} depth={depth + 1} search={search} tokenCounts={tokenCounts} showIgnored={showIgnored} />
               )}
             </li>
           );

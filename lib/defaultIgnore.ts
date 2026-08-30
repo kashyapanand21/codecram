@@ -40,3 +40,17 @@ export const DEFAULT_IGNORE_PATTERNS = [
   '*.gz',
   '*.pdf',
 ];
+
+export const HARD_IGNORE_DIRS = new Set([
+  '.git',
+  'node_modules',
+  '.next',
+  'dist',
+  'build',
+  'out',
+  'coverage',
+]);
+
+export function isHardIgnored(path: string): boolean {
+  return path.split('/').some((segment) => HARD_IGNORE_DIRS.has(segment));
+}

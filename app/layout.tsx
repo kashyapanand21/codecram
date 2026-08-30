@@ -10,7 +10,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Digest — a folder, set for reading',
+  title: 'Code-cram — a folder, set for reading',
   description: 'Compile any local folder into a single, well-set reference for language models.',
 };
 

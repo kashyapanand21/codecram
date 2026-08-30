@@ -5,7 +5,7 @@ export default function Home() {
     <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
       <div className="flex flex-wrap items-end justify-between gap-3 border-b-[3px] border-ink pb-4">
         <h1 className="font-sans text-5xl font-extrabold tracking-tight text-ink sm:text-6xl">
-          DIG<span className="text-signal">E</span>ST
+          CODE<span className="text-signal">C</span>RAM
         </h1>
         <p className="font-mono text-[11px] leading-relaxed text-dim">VOL. I &mdash; LOCAL EDITION</p>
       </div>
@@ -22,3 +22,4 @@ export default function Home() {
     </main>
   );
 }
+
