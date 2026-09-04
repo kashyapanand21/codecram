@@ -6,8 +6,8 @@ import FileTree from './FileTree';
 import OutputPanel from './OutputPanel';
 import { buildTree } from '@/lib/buildTree';
 import { buildMatcher } from '@/lib/ignoreMatcher';
-import { generateDigest, looksBinary } from '@/lib/digest';
-import { precomputeTokenCounts } from '@/lib/tokenCache';
+import { looksBinary } from '@/lib/digest';
+import { generateDigest, precomputeTokenCounts } from '@/lib/workerClient';
 import { formatBytes, formatTokens } from '@/lib/format';
 import type { FileEntry, TreeNode, DigestResult } from '@/lib/types';
 

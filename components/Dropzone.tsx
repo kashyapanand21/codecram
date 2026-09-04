@@ -48,6 +48,7 @@ export default function Dropzone({ onFiles }: { onFiles: (entries: FileEntry[]) 
         directory=""
         multiple
         className="hidden"
+        onClick={(e) => e.stopPropagation()}
         onChange={handlePick}
       />
       <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-dim/70">nothing is uploaded — everything runs in this tab</p>
